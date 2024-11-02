@@ -17,7 +17,7 @@ import { GetRequest } from "./proto/servicepackage/GetRequest";
 import { groupByUsers } from "./utils/response.util";
 
 const PROTO_PATH = path.join(__dirname, "proto/service.proto");
-const GRPC_PORT = 50051;
+const GRPC_PORT = process.env.GRPC_PORT || 50051;
 const packageDefinition = loadSync(PROTO_PATH);
 const serviceProto = loadPackageDefinition(
   packageDefinition
@@ -73,7 +73,7 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
-const HTTP_PORT = 3000;
+const HTTP_PORT = process.env.HTTP_PORT || 3000;
 app.listen(HTTP_PORT, () => {
   console.log(`HTTP server running on port http://localhost:${HTTP_PORT}`);
 });

@@ -5,7 +5,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "dev": "ts-node-dev server.ts",
-    "start": "node dist/server.js"
+    "start": "ts-node server.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
     "@grpc/proto-loader": "^0.7.13",
     "axios": "^1.7.7",
     "express": "^4.21.1",
+    "ts-node": "^10.9.2",
     "ts-proto": "^2.2.5"
   },
   "devDependencies": {
