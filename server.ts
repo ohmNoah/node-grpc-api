@@ -26,11 +26,14 @@ const serviceProto = loadPackageDefinition(
 const serviceGroupByPackage = serviceProto.servicepackage.GroupByService;
 
 const getGroupByUsers = async (
-  _request: ServerUnaryCall<GetRequest, GetGroupByResponse>,
+  request: ServerUnaryCall<GetRequest, GetGroupByResponse>,
   callback: sendUnaryData<GetGroupByResponse>
 ) => {
+  const limit = request.request.limit;
   try {
-    const response = await axios.get<IDummyJson>("https://dummyjson.com/users");
+    const response = await axios.get<IDummyJson>(
+      `https://dummyjson.com/users?limit=${limit}`
+    );
     const newData = groupByUsers(response.data);
     callback(null, newData);
   } catch (error) {
@@ -60,12 +63,14 @@ const getGroupByUsers = async (
 const app = express();
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => {
+app.get("/:limit?", (req: Request<{ limit?: string }>, res: Response) => {
+  const limit = req.params.limit || "30";
+  const limitNumber = Number(limit);
   const client = new serviceGroupByPackage(
     `localhost:${GRPC_PORT}`,
     credentials.createInsecure()
   );
-  client.GroupByUsers({}, (error, response) => {
+  client.GroupByUsers({ limit: limitNumber }, (error, response) => {
     if (error) {
       return res.status(500).send(error.message);
     }

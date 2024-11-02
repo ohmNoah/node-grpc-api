@@ -2,7 +2,9 @@ syntax = "proto3";
 
 package servicepackage;
 
-message GetRequest {}
+message GetRequest {
+  int32 limit = 1;
+}
 
 message AllGroupBy {
   int32 male = 1;
