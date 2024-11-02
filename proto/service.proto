@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package servicepackage;
+
+message GetRequest {}
+
+message AllGroupBy {
+  int32 male = 1;
+  int32 female = 2;
+  string ageRange = 3;
+  map<string, int32> hair = 4;
+  map<string, string> addressUser = 5;
+}
+
+message GetGroupByResponse {
+  AllGroupBy Department = 1;
+}
+
+
+service GroupByService {
+  rpc GroupByUsers (GetRequest) returns (GetGroupByResponse);
+}
+  
