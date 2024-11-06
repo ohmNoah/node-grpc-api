@@ -13,6 +13,7 @@ export interface IUser {
   gender: string;
   hair: IHair;
   address: IAddress;
+  company: { department: string };
 }
 
 export interface IHair {

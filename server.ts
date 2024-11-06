@@ -71,6 +71,8 @@ app.get("/:limit?", (req: Request<{ limit?: string }>, res: Response) => {
     credentials.createInsecure()
   );
   client.GroupByUsers({ limit: limitNumber }, (error, response) => {
+    console.log("😱 ~ client.GroupByUsers ~ error>>", error)
+    console.log("😱 ~ client.GroupByUsers ~ response>>", response)
     if (error) {
       return res.status(500).send(error.message);
     }

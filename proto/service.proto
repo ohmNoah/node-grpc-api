@@ -15,7 +15,7 @@ message AllGroupBy {
 }
 
 message GetGroupByResponse {
-  AllGroupBy Department = 1;
+  map<string, AllGroupBy> usersGroup = 1;
 }
 
 
